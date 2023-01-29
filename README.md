@@ -1,61 +1,65 @@
-Этот проект - тестовое задание, реализация REST backend новостного приложения с использованием DRF (Django Rest Framework).<br>
+Этот проект - тестовое задание, реализация REST backend новостного приложения с использованием DRF (Django REST Framework).<br>
 Проект завернут в Docker.
 
-###Структура проекта:
+<h3>Структура проекта:</h3>
 
-        ├── proj<br>
-        │   ├──api_news<br>
-        │   │   ├── migrations<br>
-        │   │   ├── __init__.py<br>
-        │   │   ├── admin.py<br>
-        │   │   ├── apps.py<br>
-        │   │   ├── models.py<br>
-        │   │   ├── serializers.py<br>
-        │   │   ├── tests.py<br>
-        │   │   ├── urls.py<br>
-        │   │   └── views.py<br>
-        │   ├── proj<br>
-        │   │   ├── __init__.py<br>
-        │   │   ├── asgi.py<br>
-        │   │   ├── settings.py<br>
-        │   │   ├── urls.py<br>
-        │   │   ├── wsgi.py<br>
-        │   ├── db.sqlite3<br>
-        │   ├── docker-compose.yml<br>
-        │   ├── Dockerfile<br>
-        │   ├── manage.py<br>
-        │   └── requirements.txt<br>
+        .
+        ├──api_news
+        │   ├── migrations
+        │   ├── __init__.py
+        │   ├── admin.py
+        │   ├── apps.py
+        │   ├── models.py
+        │   ├── serializers.py
+        │   ├── tests.py
+        │   ├── urls.py
+        │   └── views.py
+        ├── proj
+        │   ├── __init__.py
+        │   ├── asgi.py
+        │   ├── settings.py
+        │   ├── urls.py
+        │   ├── wsgi.py
+        ├── db.sqlite3
+        ├── docker-compose.yml
+        ├── Dockerfile
+        ├── manage.py
+        └── requirements.txt
 
 Структура соответствует стандартной, автоматически создаваемой, структуре Django-проекта.
 В приложении app_news дополнительно созданы модули serializers.py - сериализаторы моделей, urls.py - маршруты приложения api_news.<br>
-В базе данных db.sqlite3 уже загружены тестовые данные с текстом-рыбой.<br>
+В базу данных db.sqlite3 уже загружены тестовые данные с текстом-рыбой.<br>
 Файлы docker-compose.yml и Dockerfile предназначены для запуска приложения из Docker-контейнера.
 
-###Запуск приложения:
+<h3>Запуск приложения:</h3>
 <ol type="1">
 <li>Клонировать репозиторий</li>
+</ol>
 <p><b>Для запуска из IDE:</b></p>
-<li>Установить виртуальную среду и библиотеки (pip install -r requirements.txt)</li>
-<li>Из директории проекта /proj запустить локальный сервер командой:
+<ol type="1">
+<li value="2">Установить виртуальную среду и библиотеки (pip install -r requirements.txt)</li>
+<li>Из директории проекта запустить локальный сервер командой:
 
     python manage.py runserver 
 </li>
+</ol>
 <p><b>Для запуска через Docker Compose:</b></p>
-<li value="2">Из директории проекта /proj запустить docker-контейнер командой:
+<ol type="1">
+<li value="2">Из директории проекта запустить docker-контейнер командой:
 
     docker compose up
 </li>
 </ol>
-Приложение будет доступно из браузера на локальном сервере http://localhost:8000/.
+<p>Приложение будет доступно из браузера на локальном сервере http://localhost:8000/.</p>
 
-###База данных
+<h3>База данных</h3>
 В качестве базы данных использована SQLite. В базе данных содержатся следующие таблицы:
 <ul type="disc">
-<li>News - новости (поля: id (pk), name, summary, text, type_id (fk Type)</li>
+<li>News - новости (поля: id (pk), name, summary, text, type (fk Type)</li>
 <li>Type - типы новостей (поля: id (pk), name, color)
 </ul>
 
-###Функционал:
+<h3>Функционал:</h3>
 <ul type="disk">
  <li> 
   <b>CRUD (Create, Read, Update, Delete) типов новостей</b> посредством POST, GET, PUT, PATCH и DELETE-запросов:<br>
@@ -65,7 +69,7 @@
 
  Маршрут для GET, PUT, PATCH и DELETE-запросов:
  
-    http://localhost:8000/api/types/<int:type_id>/
+    http://localhost:8000/api/types/<int:id>/
 
  POST, PUT и PATCH запросы требуют передачи JSON-формата с ключами - именами полей таблицы:
  
@@ -73,7 +77,7 @@
     "name": "",
     "summary": "",
     "text": "",
-    "type_id": ""
+    "type": ""
     }
  </li>
  <li>
@@ -84,7 +88,7 @@
 
   Маршрут для GET, PUT, PATCH и DELETE-запросов:
  
-    http://localhost:8000/api/news/<int:type_id>/
+    http://localhost:8000/api/news/<int:id>/
 
   POST, PUT и PATCH запросы требуют передачи JSON-формата с ключами - именами полей таблицы:
  
